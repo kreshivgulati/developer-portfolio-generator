@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kreshiv  — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --bg: #001100;
+    --surface: #001a00;
+    --card: #002200;
+    --text: #00ff41;
+    --muted: #007a20;
+    --ac: #6af7c8;
+    --ac-bg: rgba(106,247,200,0.15);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Fira Code', monospace;
+    line-height: 1.6;
+  }
+  a { color: var(--ac); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: #001100cc;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #002200;
+    z-index: 100;
+  }
+  .nav-name { font-family: 'Fira Code', monospace; font-weight: 700; font-size: 1.1rem; color: var(--ac); }
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a { color: var(--muted); font-size: 0.85rem; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 7rem 2.5rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    gap: 4rem;
+  }
+  .hero-content { flex: 1; }
+  .hero-avatar { flex-shrink: 0; }
+  .avatar, .avatar-placeholder {
+    width: 160px; height: 160px;
+    border-radius: 20px;
+    object-fit: cover;
+    border: 2px solid var(--ac);
+    box-shadow: 0 0 40px rgba(106,247,200,0.15);
+  }
+  .avatar-placeholder {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem; font-weight: 700;
+    background: var(--surface);
+    color: var(--ac);
+  }
+  .status-badge {
+    display: inline-block;
+    background: var(--ac-bg);
+    color: var(--ac);
+    border: 1px solid var(--ac);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+  .hero-name {
+    font-family: 'Fira Code', monospace;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 0.4rem;
+  }
+  .hero-role {
+    color: var(--ac);
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+  }
+  .hero-bio {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 520px;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    color: var(--muted); font-size: 0.85rem;
+    margin-bottom: 1.8rem;
+  }
+  .hero-meta span::before { margin-right: 0.3rem; }
+  .hero-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--ac); color: #000;
+    padding: 0.7rem 1.5rem; border-radius: 8px;
+    font-weight: 600; font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.85; text-decoration: none; transform: translateY(-1px); }
+  .btn-outline {
+    border: 1px solid var(--ac); color: var(--ac);
+    padding: 0.7rem 1.5rem; border-radius: 8px;
+    font-weight: 600; font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { background: var(--ac-bg); text-decoration: none; }
+
+  /* SECTIONS */
+  section {
+    padding: 5rem 2.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: var(--ac);
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Fira Code', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    position: relative;
+    display: inline-block;
+  }
+  .section-title::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -8px;
+    width: 50px; height: 3px;
+    background: var(--ac);
+    border-radius: 2px;
+  }
+
+  /* SKILLS */
+  .skills-group { margin-bottom: 1.5rem; }
+  .skills-group-label { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.8rem; letter-spacing: 1px; }
+  .skills-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .skill-tag {
+    background: var(--ac-bg);
+    color: var(--ac);
+    border: 1px solid #6af7c840;
+    padding: 0.35rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .skill-tag:hover { background: var(--ac); color: #000; }
+  .skill-tag.tools { background: #002200; color: var(--text); border-color: #007a2040; }
+  .skill-tag.tools:hover { border-color: var(--ac); color: var(--ac); }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid #007a2030;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+  }
+  .project-card:hover {
+    border-color: var(--ac);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(106,247,200,0.15);
+  }
+  .proj-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem; gap: 1rem; }
+  .proj-title { font-family: 'Fira Code', monospace; font-size: 1.1rem; font-weight: 700; }
+  .proj-links { display: flex; gap: 0.8rem; flex-shrink: 0; }
+  .proj-links a { font-size: 0.78rem; color: var(--ac); font-weight: 500; white-space: nowrap; }
+  .proj-desc { color: var(--muted); font-size: 0.88rem; margin-bottom: 1rem; line-height: 1.6; }
+  .proj-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .proj-tech span { background: var(--surface); color: var(--muted); padding: 0.2rem 0.55rem; border-radius: 4px; font-size: 0.75rem; }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .contact-item {
+    background: var(--card);
+    border: 1px solid #007a2030;
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .contact-item:hover { border-color: var(--ac); transform: translateY(-2px); text-decoration: none; color: var(--ac); }
+  .contact-icon { font-size: 1.4rem; }
+  .contact-label { font-size: 0.75rem; color: var(--muted); display: block; }
+  .contact-value { font-weight: 600; font-size: 0.9rem; }
+
+  /* SOCIAL */
+  .social-links { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem; }
+  .social-link {
+    border: 1px solid #007a2050;
+    color: var(--muted);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+  }
+  .social-link:hover { border-color: var(--ac); color: var(--ac); text-decoration: none; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+    border-top: 1px solid #002200;
+    margin-top: 2rem;
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    border: none;
+    border-top: 1px solid #002200;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 640px) {
+    .hero { flex-direction: column-reverse; gap: 2rem; padding-top: 6rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 3rem 1.5rem; }
+  }
+
+  /* Fade-in animation */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-content > * {
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero-content > *:nth-child(5) { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">Kreshiv </div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    
+    <a href="#contact">Contact</a>
+    
+  </div>
+</nav>
+
+<section class="hero" id="about">
+  <div class="hero-content">
+    <span class="status-badge">✅ Open to Opportunities</span>
+    <h1 class="hero-name">Kreshiv </h1>
+    <div class="hero-role">Full Stack Developer</div>
+    <p class="hero-bio">I’m a second-year B.Tech student in Information Technology at IIIT Una with an interest in backend development and data-driven technologies.
+
+I work primarily with JavaScript, Node.js, and Express to build web applications. Alongside my degree, I’m pursuing the IIT Madras BSc in Data Science (currently at the Diploma level), where I’m developing skills in data analysis and problem solving.
+
+I enjoy learning how systems work under the hood, improving my DSA skills, and building practical projects that solve real-world problems.
+
+Currently looking for opportunities to learn, collaborate, and grow as a developer.</p>
+    <div class="hero-meta">
+      <span>📍 Delhi,India</span>
+      <span>✉️ kreshiv.gulati@gmail.com</span>
+      <span>⚡ 0 years exp.</span>
+    </div>
+    <div class="hero-actions">
+      
+      <a href="https://github.com/kreshiv_gulati" target="_blank" class="btn-outline">GitHub ↗</a>
+      <a href="mailto:kreshiv.gulati@gmail.com" class="btn-outline">Email Me</a>
+    </div>
+  </div>
+  <div class="hero-avatar"><img src="https://github.com/kreshiv_gulati" alt="Kreshiv " class="avatar" onerror="this.style.display='none'"></div>
+</section>
+
+
+<hr class="section-divider">
+<section id="skills">
+  <div class="section-label">expertise</div>
+  <h2 class="section-title">Skills & Tools</h2>
+  <div class="skills-group"><div class="skills-group-label">TECHNICAL SKILLS</div><div class="skills-grid"><span class="skill-tag">React</span><span class="skill-tag">Node.js</span><span class="skill-tag">JavaScript</span></div></div>
+  <div class="skills-group"><div class="skills-group-label">TOOLS & PLATFORMS</div><div class="skills-grid"><span class="skill-tag tools">Github</span><span class="skill-tag tools">Docker</span><span class="skill-tag tools">Postman</span></div></div>
+</section>
+
+
+
+
+<hr class="section-divider">
+<section id="contact">
+  <div class="section-label">get in touch</div>
+  <h2 class="section-title">Contact</h2>
+  <div class="contact-grid">
+    <a href="mailto:kreshiv.gulati@gmail.com" class="contact-item"><span class="contact-icon">✉️</span><div><span class="contact-label">Email</span><span class="contact-value">kreshiv.gulati@gmail.com</span></div></a>
+    <div class="contact-item"><span class="contact-icon">📍</span><div><span class="contact-label">Location</span><span class="contact-value">Delhi,India</span></div></div>
+    <a href="https://github.com/kreshivgulati" target="_blank" class="contact-item"><span class="contact-icon">🐙</span><div><span class="contact-label">GitHub</span><span class="contact-value">github.com/kreshiv_gulati</span></div></a>
+    <a href="https://linkedin.com/in/kreshiv-gulati" target="_blank" class="contact-item"><span class="contact-icon">💼</span><div><span class="contact-label">LinkedIn</span><span class="contact-value">linkedin.com/in/kreshiv_gulati</span></div></a>
+  </div>
+  <div class="social-links"><a href="https://github.com/kreshiv_gulati" target="_blank" class="social-link">GitHub</a><a href="https://linkedin.com/in/kreshiv_gulati" target="_blank" class="social-link">LinkedIn</a></div>
+</section>
+
+<footer>
+  <p>Built with ❤️ by Kreshiv  · Generated with DevFolio</p>
+</footer>
+
+</body>
+</html>

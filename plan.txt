@@ -1,0 +1,133 @@
+developer-portfolio-generator/
+│
+├── frontend/
+│   ├── public/
+│   │   ├── index.html
+│   │   ├── favicon.ico
+│   │   └── assets/
+│   │       ├── images/
+│   │       │   └── logo.png
+│   │       └── fonts/
+│   │
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Layout/
+│   │   │   │   ├── Header.jsx
+│   │   │   │   ├── Footer.jsx
+│   │   │   │   └── Sidebar.jsx
+│   │   │   │
+│   │   │   ├── Form/
+│   │   │   │   ├── FormStepper.jsx        ← step 1,2,3... nav
+│   │   │   │   ├── StepPersonalInfo.jsx   ← name, bio, avatar
+│   │   │   │   ├── StepSkills.jsx         ← tag input for skills
+│   │   │   │   ├── StepProjects.jsx       ← add/remove projects
+│   │   │   │   ├── StepLinks.jsx          ← github, linkedin etc
+│   │   │   │   ├── StepTemplate.jsx       ← pick theme + color
+│   │   │   │   └── TagInput.jsx           ← reusable tag component
+│   │   │   │
+│   │   │   ├── Preview/
+│   │   │   │   ├── LivePreview.jsx        ← iframe live renderer
+│   │   │   │   └── PreviewToolbar.jsx     ← download/copy buttons
+│   │   │   │
+│   │   │   └── Templates/
+│   │   │       ├── TemplateMinimal.jsx
+│   │   │       ├── TemplateVibrant.jsx
+│   │   │       ├── TemplateOcean.jsx
+│   │   │       └── TemplateTerminal.jsx
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── Home.jsx                   ← landing page
+│   │   │   ├── Generator.jsx              ← main form + preview
+│   │   │   └── NotFound.jsx               ← 404 page
+│   │   │
+│   │   ├── hooks/
+│   │   │   ├── useFormData.js             ← manages all form state
+│   │   │   ├── useTemplateEngine.js       ← generates HTML string
+│   │   │   └── useExport.js               ← download / copy logic
+│   │   │
+│   │   ├── context/
+│   │   │   └── PortfolioContext.jsx       ← global state (React Context)
+│   │   │
+│   │   ├── utils/
+│   │   │   ├── generateHTML.js            ← builds portfolio HTML
+│   │   │   ├── exportToPDF.js             ← html2pdf logic
+│   │   │   ├── colorUtils.js              ← hex to rgb, contrast check
+│   │   │   └── validators.js              ← form field validation
+│   │   │
+│   │   ├── styles/
+│   │   │   ├── globals.css                ← CSS variables, resets
+│   │   │   ├── components.css             ← shared component styles
+│   │   │   └── themes/
+│   │   │       ├── minimal.css
+│   │   │       ├── vibrant.css
+│   │   │       ├── ocean.css
+│   │   │       └── terminal.css
+│   │   │
+│   │   ├── constants/
+│   │   │   ├── templates.js               ← theme config objects
+│   │   │   ├── colors.js                  ← accent color options
+│   │   │   └── defaultData.js             ← placeholder/demo data
+│   │   │
+│   │   ├── App.jsx                        ← root component + routing
+│   │   └── main.jsx                       ← ReactDOM entry point
+│   │
+│   ├── .env                               ← VITE_API_URL=...
+│   ├── .env.example
+│   ├── .eslintrc.js
+│   ├── vite.config.js
+│   ├── tailwind.config.js
+│   ├── postcss.config.js
+│   ├── package.json
+│   └── README.md
+│
+│
+├── backend/
+│   ├── src/
+│   │   ├── controllers/
+│   │   │   ├── portfolioController.js     ← generate, save portfolio
+│   │   │   ├── exportController.js        ← PDF/HTML export logic
+│   │   │   └── userController.js          ← auth, profile management
+│   │   │
+│   │   ├── routes/
+│   │   │   ├── portfolioRoutes.js         ← /api/portfolio
+│   │   │   ├── exportRoutes.js            ← /api/export
+│   │   │   ├── userRoutes.js              ← /api/user
+│   │   │   └── index.js                   ← combines all routes
+│   │   │
+│   │   ├── models/
+│   │   │   ├── Portfolio.js               ← portfolio schema (MongoDB)
+│   │   │   └── User.js                    ← user schema
+│   │   │
+│   │   ├── services/
+│   │   │   ├── portfolioService.js        ← business logic
+│   │   │   ├── pdfService.js              ← puppeteer PDF generation
+│   │   │   └── storageService.js          ← file/cloud storage
+│   │   │
+│   │   ├── middleware/
+│   │   │   ├── authMiddleware.js          ← JWT verification
+│   │   │   ├── validateRequest.js         ← input validation
+│   │   │   └── errorHandler.js            ← global error handling
+│   │   │
+│   │   ├── config/
+│   │   │   ├── db.js                      ← MongoDB connection
+│   │   │   ├── cloudinary.js              ← image upload config
+│   │   │   └── corsOptions.js             ← allowed origins
+│   │   │
+│   │   ├── utils/
+│   │   │   ├── generateSlug.js            ← "john-doe-portfolio"
+│   │   │   ├── htmlTemplate.js            ← server-side HTML builder
+│   │   │   └── logger.js                  ← logging utility
+│   │   │
+│   │   └── app.js                         ← Express app setup
+│   │
+│   ├── server.js                          ← entry point (starts server)
+│   ├── .env                               ← DB_URI, JWT_SECRET, PORT
+│   ├── .env.example
+│   ├── .gitignore
+│   ├── package.json
+│   └── README.md
+│
+│
+├── .gitignore                             ← root gitignore
+├── README.md                              ← project overview
+└── docker-compose.yml                     ← optional: run both together
